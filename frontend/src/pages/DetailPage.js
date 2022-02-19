@@ -81,9 +81,9 @@ function DetailPage({ isLogin }) {
       </ListTopBar>
       <Blind>
         <div className={!isLogin && 'close'}>
-          {!isLogin && data.review.length !== 0 && (
+          {!isLogin && data.review.length !== 0 ? (
             <div className="blind">로그인 후 이용이 가능합니다. 😢</div>
-          )}
+          ) : null}
           {list}
         </div>
       </Blind>
