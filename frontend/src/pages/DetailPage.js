@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function DetailPage({ isLogin }) {
+function DetailPage({ isLogin, userAuth }) {
   const location = useLocation();
   const { data } = location.state;
   const [reviews, setReviews] = useState([]);
@@ -24,6 +24,8 @@ function DetailPage({ isLogin }) {
   }, []);
 
   console.log(reviews);
+
+  const isAuth = userAuth.includes(data.name);
 
   const list = reviews.map((review) => {
     return <ReviewList isLogin={isLogin} review={review} />;
@@ -72,7 +74,7 @@ function DetailPage({ isLogin }) {
       <ListTopBar>
         <div className="list-topbar">
           <h3>{reviews.length}개의 리뷰</h3>
-          {isLogin && (
+          {isLogin && isAuth && (
             <Link to={`/post/review/${data._id}`} state={{ data: data }}>
               <button>리뷰작성하기</button>
             </Link>
