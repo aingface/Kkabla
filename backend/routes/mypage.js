@@ -14,25 +14,36 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const user = res.locals.user;
+  console.log(user);
   let data;
-  if (user.isAdmin) {
-    // const admin = await Admin.findOne({})
-    //   .populate('boards')
-    //   // .populate('comments')
-    //   .lean();
-    const [reportBoard, reportComment] = await Promise.all([
-      Board.find({ isBlind: true }),
-      Comment.find({ isBlind: true }),
-    ]);
 
-    data = { reportBoard, reportComment, isAdmin: true };
-  } else {
-    const [boards, likeBoard, reviews] = await Promise.all([
-      Board.find({ creator: user.nickName }).lean(),
-      Board.find({ like: { $in: [user.nickName] } }).lean(),
-      Review.find({ creator: user.nickName }).lean(),
-    ]);
-    data = { boards, reviews, userAuth: user.auth, likeBoard, isAdmin: false };
+  if (user) {
+    if (user.isAdmin) {
+      // const admin = await Admin.findOne({})
+      //   .populate('boards')
+      //   // .populate('comments')
+      //   .lean();
+      const [reportBoard, reportComment] = await Promise.all([
+        Board.find({ isBlind: true }),
+        Comment.find({ isBlind: true }),
+      ]);
+
+      data = { reportBoard, reportComment, isAdmin: true };
+    } else {
+      const [boards, likeBoard, reviews] = await Promise.all([
+        Board.find({ creator: user.nickName }).lean(),
+        Board.find({ like: { $in: [user.nickName] } }).lean(),
+        Review.find({ creator: user.nickName }).lean(),
+      ]);
+      // console.log(boards);
+      data = {
+        boards,
+        reviews,
+        userAuth: user.auth,
+        likeBoard,
+        isAdmin: false,
+      };
+    }
   }
   res.send(data);
 });

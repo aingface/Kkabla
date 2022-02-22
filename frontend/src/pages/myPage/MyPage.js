@@ -22,6 +22,7 @@ function MyPage({ isLogin }) {
         withCredentials: true,
       })
       .then((res) => {
+        console.log(res);
         setBoard(res.data.boards);
         setReviews(res.data.reviews);
         setAuth(res.data.userAuth);

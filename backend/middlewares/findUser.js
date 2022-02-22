@@ -36,7 +36,9 @@ const findUser = async (req, res, next) => {
         hashedName,
       });
     }
+
     res.locals.user = user;
+
     next();
   } catch (error) {
     console.log(error);

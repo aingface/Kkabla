@@ -37,8 +37,6 @@ router.post('/review/:id', async (req, res) => {
         (b.review.length + 1)
       ).toFixed(1);
 
-      console.log(s);
-
       const bootcamp = await BootCamp.findOneAndUpdate(
         { _id: id },
         {
@@ -55,6 +53,37 @@ router.post('/review/:id', async (req, res) => {
       );
       return res.send(bootcamp);
     }
+  }
+});
+
+//리뷰 수정하기
+router.patch('/review/:bootCampId/:reviewId', async (req, res) => {
+  const { title, pros, cons, star } = req.body;
+  const { bootCampId, reviewId } = req.params;
+
+  if (mongoose.Types.ObjectId.isValid(id)) {
+    const review = await Review.findOneAndUpdate(
+      { _id: reviewId },
+      { title, pros, cons, star },
+      {
+        new: true,
+      },
+    );
+    res.send(review);
+  } else {
+    res.send({ message: '해당 리뷰가 존재하지 않습니다.' });
+  }
+});
+
+//리뷰 삭제하기
+router.delete('/review/:bootCampId/:reviewId', async (req, res) => {
+  const { bootCampId, reviewId } = req.params;
+
+  if (mongoose.Types.ObjectId.isValid(id)) {
+    const review = await Review.findOneAndDelete({ _id: reviewId });
+    res.send(review);
+  } else {
+    res.send({ message: '해당 리뷰가 존재하지 않습니다.' });
   }
 });
 
