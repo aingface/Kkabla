@@ -68,6 +68,12 @@
 
 3. 게시글 및 리뷰를 찾기위한 검색기능
 
+### **`aingfaceㄱ 작성한 코드`**
+front-sprint 브랜치 -> /frontend/src/components/mainPage 이하
+
+
 ### **`스토리보드 & 시나리오`**
 
 - [figma 링크](https://www.figma.com/file/EB8NxUGQyW34MLTdyUHGRz/Elice-10%ED%8C%80?node-id=0%3A1)
+
+
