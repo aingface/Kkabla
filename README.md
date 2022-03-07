@@ -68,7 +68,7 @@
 
 3. 게시글 및 리뷰를 찾기위한 검색기능
 
-### **`aingfaceㄱ 작성한 코드`**
+### **`aingface가 작성한 코드`**
 front-sprint 브랜치 -> /frontend/src/components/mainPage 이하
 
 
